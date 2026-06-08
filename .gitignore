@@ -1,0 +1,25 @@
+# Raw / large input files
+*.fasta
+*.fa
+*.faa
+*.RAW
+*.raw
+*.mzML
+*.mzML.gz
+
+# Large SAGE outputs
+*.sage.tsv
+lfq.tsv
+MSstats-Sage.csv
+results.json
+
+# Executables / local environment
+sage.exe
+*.dll
+*.log
+
+# Optional bulky intermediates
+lfq.proteins.tsv
+lfq.proteins.csv
+data.tsv
+data.csv
