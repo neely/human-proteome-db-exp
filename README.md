@@ -9,7 +9,7 @@ and optional protein-level intermediate outputs.
 The repository supports figure-level reproducibility directly. Full pipeline
 reproducibility requires downloading the OSF archive.
 
-
+```
 derived/
 ├── peptide_identification/
 │   ├── results_summary.csv
@@ -25,3 +25,4 @@ derived/
 │   └── unique_peptides/
 └── sequence_counts/
     └── output.csv
+```
