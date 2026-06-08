@@ -6,6 +6,10 @@ Large input and intermediate files are archived separately on OSF, including:
 FASTA databases, full SAGE outputs (`results.sage.tsv`, `lfq.tsv`, `results.json`),
 and optional protein-level intermediate outputs.
 
+The full in silico tryptic peptide presence/absence matrix is archived on OSF
+because it exceeds 100 MB. GitHub contains compact derived summaries used to
+generate the manuscript figures.
+
 The repository supports figure-level reproducibility directly. Full pipeline
 reproducibility requires downloading the OSF archive.
 

@@ -1,0 +1,50 @@
+flowchart TD
+    RAW["📁 8× Thermo .raw files
+    PRIDE: PXD004352"]
+    FASTA["📁 21× FASTA databases
+    UniProt · NCBI · Ensembl · HPRC · neXtProt"]
+
+    RAW -->|"ThermoRawFileParser GUI v1.7.3"| MZML["📁 8× mzML.gz files"]
+    FASTA -->|"seqCounts.py — Python"| NUMSEQ["📄 numSeq table
+    output.csv"]
+
+    MZML --> SAGE
+    FASTA --> SAGE["⚙️ SAGE v0.14.5
+    sage.bat + params.json
+    21 searches × 8 files"]
+
+    SAGE --> OUT["📁 21× output directories
+    results.sage.tsv · lfq.tsv · results.json"]
+
+    OUT -->|"process_lfq.py — Python
+    provided by M. Lazear"| UNIQ["📄 Unique peptide union
+    21,040 peptides · output.txt"]
+
+    OUT -->|"process_data.py peptide — Python
+    filter q < 0.01 · transpose"| PEPCSV["📄 pepdata.csv"]
+    PEPCSV -->|"rankSum2.r — R + dplyr
+    Wilcoxon rank-sum + BH correction"| DAPPE["📄 Peptide DAPs
+    results.csv · BH-corrected p < 0.05
+    ✅ PRIMARY RESULT"]
+
+    OUT -->|"prep.py — Python
+    median polish · log2
+    provided by M. Lazear"| PROTTSV["📄 lfq.proteins.tsv"]
+    PROTTSV -->|"process_data.py protein — Python
+    inverse log2 · transpose"| PROTCSV["📄 data.csv"]
+    PROTCSV -->|"rankSum2.r — R + dplyr
+    Wilcoxon rank-sum + BH correction"| DAPPRO["📄 Protein DAPs
+    results.csv · BH-corrected p < 0.05
+    ⚠️ conducted, not primary focus"]
+
+    style RAW fill:#e8f4f8,stroke:#5b9bd5
+    style FASTA fill:#e8f4f8,stroke:#5b9bd5
+    style MZML fill:#e8f4f8,stroke:#5b9bd5
+    style OUT fill:#e8f4f8,stroke:#5b9bd5
+    style PEPCSV fill:#e8f4f8,stroke:#5b9bd5
+    style PROTTSV fill:#e8f4f8,stroke:#5b9bd5
+    style PROTCSV fill:#e8f4f8,stroke:#5b9bd5
+    style NUMSEQ fill:#d1ecf1,stroke:#17a2b8
+    style UNIQ fill:#d1ecf1,stroke:#17a2b8
+    style DAPPE fill:#d4edda,stroke:#28a745
+    style DAPPRO fill:#fff3cd,stroke:#ffc107
